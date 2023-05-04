@@ -5,7 +5,8 @@ import os
 from langchain import OpenAI
 from llama_index import StorageContext, load_index_from_storage
 
-os.environ['OPENAI_API_KEY'] = "<PUT YOUR API KEY HERE>"
+# Set your API here.
+# os.environ['OPENAI_API_KEY'] = "<PUT YOUR API KEY HERE>"
 
 storage_context = StorageContext.from_defaults(persist_dir="index_storage")
 index = load_index_from_storage(storage_context)
