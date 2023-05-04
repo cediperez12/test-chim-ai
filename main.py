@@ -2,11 +2,13 @@ from flask import Flask, request
 import json
 import os
 from langchain import OpenAI
-from llama_index import GPTSimpleVectorIndex
+from llama_index import StorageContext, load_index_from_storage
 
-os.environ['OPENAI_API_KEY'] = "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"
+os.environ['OPENAI_API_KEY'] = "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"
 
-ai = GPTSimpleVectorIndex.load_from_disk('index.json')
+storage_context = StorageContext.from_defaults(persist_dir="index_storage")
+index = load_index_from_storage(storage_context)
+ai = index.as_query_engine()
 
 app = Flask(__name__)
 
