@@ -39,5 +39,3 @@ def ask_chim():
       'query': query,
       'response': reply[1:len(reply)]
     })
-
-app.run(host='0.0.0.0', port=81)
