@@ -1,16 +1,18 @@
 from flask import Flask, request
+from flask_cors import CORS
 import json
 import os
 from langchain import OpenAI
 from llama_index import StorageContext, load_index_from_storage
 
-os.environ['OPENAI_API_KEY'] = "<ENTER YOUR API KEY HERE>"
+os.environ['OPENAI_API_KEY'] = "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"
 
 storage_context = StorageContext.from_defaults(persist_dir="index_storage")
 index = load_index_from_storage(storage_context)
 ai = index.as_query_engine()
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def index():
@@ -30,9 +32,11 @@ def ask_chim():
     print(f"query: {query}")
     print(f"response: {response.response}")
 
+    reply = response.response
+
     return json.dumps({
       'query': query,
-      'response': response.response
+      'response': reply[1:len(reply)]
     })
 
 app.run(host='0.0.0.0', port=81)
